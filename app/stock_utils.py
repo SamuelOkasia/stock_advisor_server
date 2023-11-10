@@ -60,10 +60,22 @@ def get_percent(old_price,price_today):
 def get_stock_news(symbol,api_key):
     # Fetch news via external API or use dummy data
     import requests
+
+    # Current date
+    today_date = datetime.now().date()
+
+    # Starting date (e.g., 30 days before today)
+    start_date = today_date - timedelta(days=1)
+
+    # Formatting dates in 'YYYY-MM-DD' format
+    today_date_str = today_date.strftime('%Y-%m-%d')
+    start_date_str = start_date.strftime('%Y-%m-%d')
+
+
     url = ('https://newsapi.org/v2/everything?'
            f'q={symbol}&'
-           'from=2023-10-05&'
-           'to=2023-11-04&'
+           f'from={start_date_str}'
+           f'to={today_date_str}'
            'language=en&'
            'sort_by=relevancy&'
            'page=1&'
